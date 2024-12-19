@@ -18,6 +18,11 @@ This script currently shows the following information:
 - fact chunk
 - data chunk
 
+## Usage
+
+wave_file_struct_viewer [-h] WAV-file [WAV-file ...]
+
+
 ## Reference
 
 - [RIFF File Structure](https://johnloomis.org/cpe102/asgn/asgn1/riff.html)  
