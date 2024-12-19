@@ -1,4 +1,5 @@
 import argparse
+import glob
 import os
 import sys
 import wave
@@ -291,10 +292,21 @@ parser.add_argument('-h', '--help', action='help', help='Show this help message 
 parser.add_argument('wav_files', type=str, nargs='+', metavar='WAV-file', help='Specify one or more WAV file(s).')
 
 args = parser.parse_args()
-wav_files = args.wav_files
+arg_files = args.wav_files
 
 
 def main():
+    # expand wildcards
+    wav_files = []
+    for arg_file in arg_files:
+        if '*' in arg_file or '?' in arg_file:
+            # expand wildcard
+            wav_files.extend(glob.glob(arg_file))
+        else:
+            wav_files.append(arg_file)
+
+    pass
+
     for wav_file in wav_files:
         # check if file exists
         if not os.path.exists(wav_file):
