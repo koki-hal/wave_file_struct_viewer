@@ -20,7 +20,7 @@ This script currently shows the following information:
 
 ## Usage
 
-wave_file_struct_viewer [-h] WAV-file [WAV-file ...]
+python wave_file_struct_viewer.py [-h] WAV-file [WAV-file ...]
 
 ex)  
 python wave_file_struct_viewer.py test1.wav test2.wav test_?.wav test-*.wav
