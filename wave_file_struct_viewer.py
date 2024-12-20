@@ -29,11 +29,11 @@ class ChunkHeader:          # 8 bytes
 
 @dataclass
 class FmtChunk:             # 16 bytes
-    sound_fmt_type: int     # 2 byte integer
+    audio_fmt_type: int     # 2 byte integer
     channels: int           # 2 byte integer
     sampling_rate: int      # 4 byte integer
     ave_bytes_per_sec: int  # 4 byte integer
-    block_size: int         # 2 byte integer
+    block_align: int        # 2 byte integer
     bits_per_sample: int    # 2 byte integer
 
 @dataclass
@@ -96,12 +96,12 @@ def analize_fmt_chunk(f):
 
     fmt = FmtChunk(*wave.struct.unpack('<HHIIHH', databuf))
 
-    print(f'  sound format type     : {fmt.sound_fmt_type}', end='')
-    if   fmt.sound_fmt_type == 1:  print(f' - Linear pulse code modulation(Linear PCM)')
-    elif fmt.sound_fmt_type == 2:  print(f' - Microsoft ADPCM')
-    elif fmt.sound_fmt_type == 3:  print(f' - IEEE float')
-    elif fmt.sound_fmt_type == 6:  print(f' - ITU G.711 a-law')
-    elif fmt.sound_fmt_type == 7:  print(f' - ITU G.711 µ-law')
+    print(f'  audio format type     : {fmt.audio_fmt_type}', end='')
+    if   fmt.audio_fmt_type == 1:  print(f' - Linear pulse code modulation(Linear PCM)')
+    elif fmt.audio_fmt_type == 2:  print(f' - Microsoft ADPCM')
+    elif fmt.audio_fmt_type == 3:  print(f' - IEEE float')
+    elif fmt.audio_fmt_type == 6:  print(f' - ITU G.711 a-law')
+    elif fmt.audio_fmt_type == 7:  print(f' - ITU G.711 µ-law')
     else:                          print(f' - Unknown')
 
     print(f'  channels              : {fmt.channels}', end='')
@@ -110,11 +110,11 @@ def analize_fmt_chunk(f):
     else:                    print()
 
     print(f'  sampling rate         : {fmt.sampling_rate:,}')
-    print(f'  average bytes per sec : {fmt.ave_bytes_per_sec:,} (= sampling rate * block size)')
-    print(f'  block size            : {fmt.block_size} (= channels * bits per sample / 8)')
+    print(f'  average bytes per sec : {fmt.ave_bytes_per_sec:,} (= sampling rate * block alignment)')
+    print(f'  block alignment       : {fmt.block_align} (= channels * bits per sample / 8)')
     print(f'  bits per sample       : {fmt.bits_per_sample}')
 
-    if fmt.sound_fmt_type != 1:
+    if fmt.audio_fmt_type != 1:
         color_red()
         print()
         print('Error:')
