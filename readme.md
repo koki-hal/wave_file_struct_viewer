@@ -34,3 +34,8 @@ python wave_file_struct_viewer.py test1.wav test2.wav test_?.wav test-*.wav
 - [Format chunk (of a Wave file)](https://www.recordingblogs.com/wiki/format-chunk-of-a-wave-file)  
 - [Fact chunk (of a Wave file)](https://www.recordingblogs.com/wiki/fact-chunk-of-a-wave-file)
 
+
+## Environment
+
+- Windows 11 Pro
+- Python 3.13.0
