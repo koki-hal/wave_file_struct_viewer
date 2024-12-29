@@ -278,24 +278,29 @@ def analize_wav_structure(wav_file):
     pass
 
 
-app_name = 'wave_file_struct_viewer'
-app_description = 'Show struucture of WAV file(s).'
+def argument_parser():
+    app_name = 'wave_file_struct_viewer'
+    app_description = 'Show struucture of WAV file(s).'
 
-parser = argparse.ArgumentParser(
-        prog=app_name,
-        description=app_description,
-        add_help=False,
-        allow_abbrev=False,
-    )
+    parser = argparse.ArgumentParser(
+            prog=app_name,
+            description=app_description,
+            add_help=False,
+            allow_abbrev=False,
+        )
 
-parser.add_argument('-h', '--help', action='help', help='Show this help message and exit.')
-parser.add_argument('wav_files', type=str, nargs='+', metavar='WAV-file', help='Specify one or more WAV file(s).')
+    parser.add_argument('-h', '--help', action='help', help='Show this help message and exit.')
+    parser.add_argument('wav_files', type=str, nargs='+', metavar='WAV-file', help='Specify one or more WAV file(s).')
 
-args = parser.parse_args()
-arg_files = args.wav_files
+    args = parser.parse_args()
+
+    return args
 
 
 def main():
+    args = argument_parser()
+    arg_files = args.wav_files
+
     # expand wildcards
     wav_files = []
     for arg_file in arg_files:
