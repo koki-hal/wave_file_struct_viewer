@@ -297,18 +297,35 @@ def argument_parser():
     return args
 
 
+def expand_wildcards(arg_files):
+    """
+    Expand wildcards.
+    Exclude duplicate files.
+    """
+    # expand wildcards
+    files = []
+    for arg_file in arg_files:
+        if '*' in arg_file or '?' in arg_file:
+            # expand wildcard
+            expanded_files = glob.glob(arg_file)
+            # append non-listed files
+            for expanded_file in expanded_files:
+                if not expanded_file in files:
+                    files.append(expanded_file)
+        else:
+            # append non-listed files
+            if not arg_file in files:
+                files.append(arg_file)
+
+    return files
+
+
 def main():
     args = argument_parser()
     arg_files = args.wav_files
 
     # expand wildcards
-    wav_files = []
-    for arg_file in arg_files:
-        if '*' in arg_file or '?' in arg_file:
-            # expand wildcard
-            wav_files.extend(glob.glob(arg_file))
-        else:
-            wav_files.append(arg_file)
+    wav_files = expand_wildcards(arg_files)
 
     pass
 
